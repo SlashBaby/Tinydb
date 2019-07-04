@@ -1,0 +1,79 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>数据库后台管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'myadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+    <link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 页头开始 -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">数据库后台管理系统</a>
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            {% if request.session.adminuser %}
+                            <li class="layout-user-downmenu-item">
+                                <a href="">{{request.session.adminuser}}</a>
+                            </li>
+                            <li class="layout-user-downmenu-item">
+                                <a href="{% url 'myadmin_logout'%}" class="layout-user-downmenu-link">退出登陆</a>
+                            </li>
+                            {% else %}
+                            <li class="layout-user-downmenu-item">
+                                <a href="{% url 'login'%}" class="layout-user-downmenu-link">立即登录</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div><!-- 页头结束-->
+        <div class="row">
+            <div class="span3">
+                <!-- 侧边导航开始 -->
+                <div class="well" style="padding: 8px 0;height:660px">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">
+                            用户管理
+                        </li>
+                        <li>
+                            <a href="{% url 'myadmin_users_index' %}"><i class="icon-folder-open"></i> 浏览用户</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'myadmin_users_add' %}"><i class="icon-check"></i> 添加用户</a>
+                        </li>
+                        <li class="nav-header">
+                            试题管理
+                        </li>
+                        <li>
+                            <a href="{% url 'myadmin_tests_index' %}"><i class="icon-envelope"></i> 浏览试题</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'myadmin_tests_add' %}"><i class="icon-file"></i> 添加试题</a>
+                        </li>
+                    </ul>
+                </div><!-- 侧边导航结束 -->
+            </div>
+            <div class="span9">
+                <!-- 主体开始 -->
+                {% block mainbody %}
+                {% endblock %}
+                <!-- 主体结束 -->
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'myadmin/js/jquery.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'myadmin/js/site.js' %}"></script>
+</body>
+
+</html>

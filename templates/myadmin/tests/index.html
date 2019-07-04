@@ -1,0 +1,31 @@
+{% extends "myadmin/base.html" %}
+{% block mainbody %}
+<h4>
+    题目信息管理
+</h4>
+<div class="well" style="overflow: scroll;height: 600px">
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>题目</th>
+            <th>答案</th> 
+            <th>操作</th>  
+        </tr>
+    </thead>
+    <tbody>
+        {% for vo in userslist %}
+        <tr>
+            <td>{{ vo.name }}</td>
+            <td>{{ vo.content }}</td>
+            <td>{{ vo.answer }}</td>
+            <td>
+                <a href="{% url 'myadmin_tests_del' vo.id %}" class="view-link">删除</a>
+                <a href="{% url 'myadmin_tests_edit' vo.id %}" class="view-link">编辑</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

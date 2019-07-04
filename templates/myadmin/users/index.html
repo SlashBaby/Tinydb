@@ -1,0 +1,54 @@
+{% extends "myadmin/base.html" %}
+{% block mainbody %}
+<h4>
+    会员信息管理
+</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>名字</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vo in userslist %}
+        <tr>
+            <td>{{ vo.sid }}</td>
+            <td>{% if vo.state == 1 %}
+                老师
+                {% else %}
+                学生
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'myadmin_users_del' vo.id %}" class="view-link">删除</a>
+                <a href="{% url 'myadmin_users_edit' vo.id %}" class="view-link">编辑</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="pagination">
+    <ul>
+        <li class="disabled">
+            <a href="#">&laquo;</a>
+        </li>
+        <li class="active">
+            <a href="#">1</a>
+        </li>
+        <li>
+            <a href="#">2</a>
+        </li>
+        <li>
+            <a href="#">3</a>
+        </li>
+        <li>
+            <a href="#">4</a>
+        </li>
+        <li>
+            <a href="#">&raquo;</a>
+        </li>
+    </ul>
+</div>
+{% endblock %}

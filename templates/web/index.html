@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+{% block mainbody %}
+<div class="hero-unit">
+    <h3>
+        欢迎来到我们的数据系统！
+    </h3>
+    <p>
+        在这里你可以开始快乐的数据库学习之旅。
+    </p>
+    <a class='btn btn-primary' href="{% url 'list' %}">开始做题</a>
+</div>
+
+{% endblock %}

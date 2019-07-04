@@ -1,0 +1,37 @@
+{% extends "web/base.html" %}
+{% block mainbody %}
+<h4>
+    题目列表
+</h4>
+<div class="well" style="overflow: scroll;height: 650px">   
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>编号</th>
+            <th>题目</th>
+            <th>操作</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vo in testlist %}
+        <tr>
+            <td>{{ vo.name }}</td>
+            <td>{{ vo.content }}</td>
+            <td>
+                <a href="{% url 'detail' vo.index %}" class="view-link">做题</a>
+            </td>
+            <td>
+                {% if vo.state == 0 %}
+                错误
+                {% elif vo.state == 1 %}
+                正确
+                {% else %}
+                未提交
+                {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div> 
+{% endblock %}
