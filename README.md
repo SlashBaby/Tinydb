@@ -7,7 +7,6 @@
 ## 技术栈
 ```
 python3.6 + django1.11* + mysql + pymysql + jqury + d3 + bootstrap
-
 ```
 &emsp;&emsp;
 ## 使用方法
@@ -35,7 +34,6 @@ DATABASES = {
 ```
 create database pub; // 用来存放所有题需要的表
 create database testdb; // 用来存放用户、试题信息、得分情况
-
 ```
 - 在testdb里面创建几张新的表。
 ```
@@ -85,20 +83,17 @@ create user admin identified by 123;
 grant select, insert, update, delete on admin.* to admin;
 grant create, drop, select, insert, update, delete on testdb.* admin;
 flush privileges;
-
 ```
 ### 运行
 &emsp;&emsp;在和manage.py同级的目录下运行以下指令。
 ```
 python3 manage.py runserver 0:8000
-
 ```
 
 ### 进入后台
 &emsp;&emsp;默认连接的是网站的前台，如果需要登入后台请输入如下的地址。
 ```
 http://0.0.0.0:8888/myadmin/
-
 ```
 &emsp;&emsp;
 ## 前台
