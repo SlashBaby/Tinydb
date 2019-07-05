@@ -1,6 +1,4 @@
 # Tinydb
-
----
 ## 概述
 &emsp;&emsp;该系统是一个在线数据库做题系统。<br/>
 &emsp;&emsp;分为前台和后台。学生和老师用户在注册账号后可以在前台做和数据库有关的题，老师用户可以登入后台进行用户和试题的查看和修改（添加、删除、编辑）。
@@ -17,12 +15,12 @@ cd tinydb
 git clone https://github.com/SlashBaby/Tinydb.git
 ```
 ### 配置数据库
-- 修改tinydb/settings.py文件里的如下内容
+- 修改tinydb/settings.py文件里的如下内容:
 ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'your_db_name',
+        'NAME': 'testdb',
         'USER': 'root_user_name',
         'PASSWORD': 'root_user_password',
         'HOST': 'your_host',
@@ -32,8 +30,8 @@ DATABASES = {
 ```
 - 创建两个新的数据库，在mysql中输入如下命令:
 ```
-create databases pub; // 用来存放所有题需要的表
-create databases testdb; // 用来存放用户、试题信息、得分情况
+create database pub; // 用来存放所有题需要的表
+create database testdb; // 用来存放用户、试题信息、得分情况
 
 ```
 - 在testdb里面创建几张新的表:
@@ -48,7 +46,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `sid_UNIQUE` (`sid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
-//题目信息表
+// 题目信息表
 CREATE TABLE `tests` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -58,7 +56,7 @@ CREATE TABLE `tests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
-//得分表
+// 得分表
 CREATE TABLE `score` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tid` int(11) NOT NULL,
@@ -68,15 +66,15 @@ CREATE TABLE `score` (
   KEY `tid_idx_1` (`tid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 ```
-### 导入表噶
-&emsp;&emsp;向pub数据中加入题目所需要的表格:
+### 导入表
+&emsp;&emsp;向pub数据中加入题目所需要的表格。
 ### 创建用户
 &emsp;&emsp;创建一个第一个管理员用户用来登入后台:
 ```
 // 在用户表里注册
 insert into testdb.users(sid, password, state) values('admin', '123', 1);
 
-// 给其创建一个数据库
+// 给其创建一个数据库，用于存放该用户创建的所有的表
 create database admin;
 
 // 在数据库中创建一个相应的用户并赋予对应的权限
