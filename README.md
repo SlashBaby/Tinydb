@@ -1,12 +1,14 @@
 # Tinydb
+&emsp;&emsp;
 ## 概述
 &emsp;&emsp;该系统是一个在线数据库做题系统。<br/>
 &emsp;&emsp;分为前台和后台。学生和老师用户在注册账号后可以在前台做和数据库有关的题，老师用户可以登入后台进行用户和试题的查看和修改（添加、删除、编辑）。
-
+&emsp;&emsp;
 ## 技术栈
 ```
-python3.6 + django1.11* + mysql + pymysql + jqury + d3 + bootstrap4
+python3.6 + django1.11* + mysql + pymysql + jqury + d3 + bootstrap
 ```
+&emsp;&emsp;
 ## 使用方法
 ### 下载代码
 ```
@@ -15,26 +17,26 @@ cd tinydb
 git clone https://github.com/SlashBaby/Tinydb.git
 ```
 ### 配置数据库
-- 修改tinydb/settings.py文件里的如下内容:
+- 修改tinydb/settings.py文件里的如下内容（用于连接数据库）。
 ```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'testdb',
-        'USER': 'root_user_name',
-        'PASSWORD': 'root_user_password',
-        'HOST': 'your_host',
-        'PORT': 'your_port',
+        'USER': '<root_user_name>',
+        'PASSWORD': '<root_user_password>',
+        'HOST': '<your_host>',
+        'PORT': '<your_port>',
     }
 }
 ```
-- 创建两个新的数据库，在mysql中输入如下命令:
+- 创建两个新的数据库，在mysql中输入如下命令。
 ```
 create database pub; // 用来存放所有题需要的表
 create database testdb; // 用来存放用户、试题信息、得分情况
 
 ```
-- 在testdb里面创建几张新的表:
+- 在testdb里面创建几张新的表。
 ```
 // 用户表
 CREATE TABLE `users` (
@@ -68,8 +70,8 @@ CREATE TABLE `score` (
 ```
 ### 导入表
 &emsp;&emsp;向pub数据中加入题目所需要的表格。
-### 创建用户
-&emsp;&emsp;创建一个第一个管理员用户用来登入后台:
+### 创建第一个管理员用户
+&emsp;&emsp;用来登入后台。
 ```
 // 在用户表里注册
 insert into testdb.users(sid, password, state) values('admin', '123', 1);
@@ -85,16 +87,19 @@ flush privileges;
 
 ```
 ### 运行
+&emsp;&emsp;在和manage.py同级的目录下运行以下指令。
 ```
 python3 manage.py runserver 0:8000
 
 ```
 
 ### 进入后台
+&emsp;&emsp;默认连接的是网站的前台，如果需要登入后台请输入如下的地址。
 ```
 http://0.0.0.0:8888/myadmin/
 
 ```
+&emsp;&emsp;
 ## 前台
 ### 登陆页面
 &emsp;&emsp;在该界面可以进行登录。
@@ -108,6 +113,7 @@ http://0.0.0.0:8888/myadmin/
 ### 题目详情页面
 &emsp;&emsp;该界面主要用来做题。上面的左边是题目的详细描述，可以查看下一题、上一题，或者检测本题。上面的右边可以输入一条或者多条mysql的sql语句。当点击提交按钮的时候，下面会为每一条sql语句返回一个结果。
 ![Alt text](./static/img/WX20190704-202933@2x.png)
+&emsp;&emsp;
 ## 后台
 ### 登录页面
 &emsp;&emsp;在该界面老师用户可以登录，如果不登陆无法访问后台的其他内容。
