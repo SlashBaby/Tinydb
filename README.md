@@ -7,6 +7,7 @@
 ## 技术栈
 ```
 python3.6 + django1.11* + mysql + pymysql + jqury + d3 + bootstrap
+
 ```
 &emsp;&emsp;
 ## 使用方法

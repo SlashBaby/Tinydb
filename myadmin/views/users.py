@@ -2,12 +2,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from common.models import Users
 import pymysql
+from tinydb.settings import DATABASES as db_config
 
 #-----------数据库操作--------------#
 def excute_sql(sqllist):
     try:
         #建立连接
-        conn = pymysql.connect(host='localhost', port=3306, user='root', password='12345678', db='testdb', charset='utf8')
+        # 获得数据库信息
+        host = db_config['default']['HOST']
+        port = int(db_config['default']['PORT'])
+        user = db_config['default']['USER']
+        password = db_config['default']['PASSWORD']
+
+        #建立连接
+        conn = pymysql.connect(host=host, port=port, user=user, password=password, db='testdb', charset='utf8')
         cursor = conn.cursor()
         for sql in sqllist:
             cursor.execute(sql)
@@ -111,6 +119,16 @@ def update(request,uid):
         ob = Users.objects.get(id=uid)
         ob.sid = request.POST['name']
         ob.state = request.POST['state']
+        # 修改权限
+        if ob.state == 0:
+            # 回收访问testdb的权限
+            sqllist = ["revoke drop, create, select, insert, update, delete on testdb.* to {};".format(ob.sid)]
+        else:
+            # 添加访问testdb的权限
+            sqllist = ["grant drop, create, select, insert, update, delete on testdb.* to {};".format(ob.sid)] 
+        sqllist.append("flush privileges;")
+        excute_sql(sqllist)
+        
         ob.save()
         context = {'info':'修改成功！'}
     except Exception as err:
